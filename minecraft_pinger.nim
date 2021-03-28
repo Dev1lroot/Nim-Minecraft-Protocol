@@ -5,9 +5,6 @@ var finish_threads = 0
 var failed_threads = 0
 var sz = 512
 
-
-stdout.writeLine("Client: connected")
-
 type
   MinecraftServer* = ref object of RootObj
     address*: string
