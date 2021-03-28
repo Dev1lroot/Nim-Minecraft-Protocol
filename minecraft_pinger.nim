@@ -14,14 +14,8 @@ type
     port*: int
     thread*: int
 
-proc toFixed(number,fixed: int):string =
-  var result = $number
-  while result.len < fixed:
-    result = "0" & result
-  return result
-
 proc setStatus(server: MinecraftServer, status: int) =
-  let prefix = "[Thread #" & server.thread.toFixed(5) & "] "
+  let prefix = "[Thread #" & intToStr(server.thread,5) & "] "
   if status == 0:
     echo prefix & "Failed to ping server: " & server.address & " on port " & $server.port
     failed_threads = failed_threads + 1
@@ -33,9 +27,9 @@ proc setStatus(server: MinecraftServer, status: int) =
     finish_threads = finish_threads + 1
 
 proc setStatus(server: MinecraftServer, status, package: int) =
-  let prefix = "[Thread #" & server.thread.toFixed(5) & "] "
+  let prefix = "[Thread #" & intToStr(server.thread,5) & "] "
   if status == 3:
-    echo prefix & "Getting data package #" & package.toFixed(5) & " size of " & $sz & " from " & server.address & " on port " & $server.port
+    echo prefix & "Getting data package #" & intToStr(package,5) & " size of " & $sz & " from " & server.address & " on port " & $server.port
 
 proc receive(s: Socket, server: MinecraftServer):string=
   var i = 0
